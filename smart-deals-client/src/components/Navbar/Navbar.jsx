@@ -48,7 +48,7 @@ const Navbar = () => {
   return (
     <div className="shadow-sm">
       <MyContainer>
-        <div className="navbar bg-base-100">
+        <nav className="navbar bg-base-100">
           <div className="navbar-start">
             <div className="dropdown">
               <div
@@ -85,33 +85,35 @@ const Navbar = () => {
             </Link>
           </div>
           <div className="navbar-center hidden lg:flex">
-            <ul className="menu menu-horizontal px-1 text-base font-semibold flex gap-5">
+            <ul className="menu menu-horizontal px-1 text-base font-bold flex gap-5">
               {links}
             </ul>
           </div>
-          {user ? (
-            <div>
-              <button
-                onClick={handleSignOut}
-                className="gradient-btn cursor-pointer"
-              >
-                SignOut
-              </button>
-            </div>
-          ) : (
-            <div className="navbar-end flex gap-5">
-              <Link
-                to="/login"
-                className="font-bold border border-purple-700 py-2 px-4 rounded bg-gradient-to-r from-purple-700 to-purple-500 bg-clip-text text-transparent"
-              >
-                Login
-              </Link>
-              <Link to="/register" className="gradient-btn">
-                Register
-              </Link>
-            </div>
-          )}
-        </div>
+          <div className="navbar-end ">
+            {user ? (
+              <div>
+                <button
+                  onClick={handleSignOut}
+                  className="gradient-btn cursor-pointer"
+                >
+                  SignOut
+                </button>
+              </div>
+            ) : (
+              <div className="flex gap-5">
+                <Link
+                  to="/login"
+                  className="font-bold border border-purple-700 py-2 px-4 rounded bg-gradient-to-r from-purple-700 to-purple-500 bg-clip-text text-transparent"
+                >
+                  Login
+                </Link>
+                <Link to="/register" className="gradient-btn">
+                  Register
+                </Link>
+              </div>
+            )}
+          </div>
+        </nav>
       </MyContainer>
     </div>
   );
