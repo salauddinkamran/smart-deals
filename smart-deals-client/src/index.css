@@ -1,0 +1,22 @@
+@import "tailwindcss";
+@plugin "daisyui" {
+  themes: light --default;
+ }
+@plugin "daisyui/theme" {
+  name: "light";
+  default: true;
+  --color-primary: blue;
+  --color-secondary: teal;
+}
+
+.gradient-btn {
+  @apply text-white font-bold bg-gradient-to-r from-purple-700 to-purple-500 border border-purple-600 py-2 px-4 rounded
+}
+
+.gradient-text  {
+  @apply bg-gradient-to-r 
+        from-purple-700 
+        to-purple-500 
+        bg-clip-text 
+        text-transparent
+}
