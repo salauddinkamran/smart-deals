@@ -35,7 +35,7 @@ const Login = () => {
     <div className="h-screen flex items-center justify-center bg-gray-100">
       <div className="card-body sm:max-w-10/12 md:max-w-8/12 lg:max-w-6/12 xl:max-w-3/12 mx-auto bg-white rounded">
         <div className="text-center">
-          <h3 className="text-3xl font-bold mb-2">Register Now!</h3>
+          <h3 className="text-3xl font-bold mb-2">Login</h3>
           <p>
             Don't have an account?{" "}
             <Link to="/register" className="gradient-text">
