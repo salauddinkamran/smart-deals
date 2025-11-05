@@ -1,5 +1,4 @@
 import React from 'react';
-import MyContainer from '../MyContainer/MyContainer';
 import Banner from '../Banner/Banner';
 import LatestProducts from '../LatestProducts/LatestProducts';
 
