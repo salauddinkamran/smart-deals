@@ -23,8 +23,9 @@ const Login = () => {
 
   const handleGoogleSignIn = () => {
     googleSignIn()
-      .then(() => {
+      .then((resuslt) => {
         toast("SignIn successfully");
+        console.log(resuslt.user)
       })
       .catch((error) => {
         toast(error.message);

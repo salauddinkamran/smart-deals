@@ -7,6 +7,7 @@ import Login from "../Login/Login";
 import MyProducts from "../MyProducts/MyProducts";
 import MyBids from "../MyBids/MyBids";
 import ProductDetails from "../ProductDetails/ProductDetails";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -19,7 +20,9 @@ export const router = createBrowserRouter([
       },
       {
         path: "allProducts",
-        Component: AllProducts,
+        element: <PrivateRoute>
+          <AllProducts></AllProducts>
+        </PrivateRoute>,
       },
       {
         path: "/register",
@@ -31,11 +34,15 @@ export const router = createBrowserRouter([
       },
       {
         path: "/myProducts",
-        element: <MyProducts></MyProducts>,
+        element: <PrivateRoute>
+          <MyProducts></MyProducts>
+        </PrivateRoute>,
       },
       {
         path: "/myBids",
-        element: <MyBids></MyBids>,
+        element: <PrivateRoute>
+          <MyBids></MyBids>
+        </PrivateRoute>,
       },
       {
         path: "/productDetails/:id",

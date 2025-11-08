@@ -32,14 +32,14 @@ const AuthProvider = ({ children }) => {
   };
 
   const signOutAuth = () => {
-    setLoading(true)
-    return signOut(auth)
-  }
+    setLoading(true);
+    return signOut(auth);
+  };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      setLoading(false)
+      setLoading(false);
     });
 
     return () => {
@@ -53,9 +53,11 @@ const AuthProvider = ({ children }) => {
     user,
     loading,
     googleSignIn,
-    signOutAuth
+    signOutAuth,
   };
-  return <AuthContext value={authInfo}>{children}</AuthContext>;
+  return (
+    <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
+  );
 };
 
 export default AuthProvider;
