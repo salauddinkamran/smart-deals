@@ -4,6 +4,7 @@ import { Link, useLoaderData } from "react-router";
 import MyContainer from "../MyContainer/MyContainer";
 import { FaArrowLeftLong } from "react-icons/fa6";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 const ProductDetails = () => {
   const { user } = use(AuthContext);
@@ -25,17 +26,30 @@ const ProductDetails = () => {
   const bidModalRef = useRef(null);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/products/bids/${productId}`, {
-      headers: {
-        authorization: `Bearer ${user.accessToken}`
-      }
-    })
-      .then((res) => res.json())
+    axios
+      .get(`http://localhost:3000/products/bids/${productId}`, {
+        headers: {
+          authorization: `Bearer ${user.accessToken}`,
+        },
+      })
       .then((data) => {
-        console.log("bids for this product", data);
-        setBids(data);
+        console.log("After axios get", data);
+        setBids(data.data);
       });
-  }, [productId, user]);
+  }, [productId]);
+
+  // useEffect(() => {
+  //   fetch(`http://localhost:3000/products/bids/${productId}`, {
+  //     headers: {
+  //       authorization: `Bearer ${user.accessToken}`
+  //     }
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       console.log("bids for this product", data);
+  //       setBids(data);
+  //     });
+  // }, [productId]);
 
   const handleBidModalOpen = () => {
     bidModalRef.current.showModal();
@@ -77,8 +91,8 @@ const ProductDetails = () => {
           });
           // add the new bid to the state
           newBid._id = data.insertedId;
-          const newBids = [...bids, newBid]
-          newBid.sort((a, b) => b.bid_price - a.bid_price)
+          const newBids = [...bids, newBid];
+          newBid.sort((a, b) => b.bid_price - a.bid_price);
           setBids(newBids);
         }
       });
@@ -222,8 +236,8 @@ const ProductDetails = () => {
               <tbody>
                 {/* row 1 */}
                 {bids.map((bid, index) => (
-                  <tr className="">
-                    <th>{ index + 1}</th>
+                  <tr key={bid._id} className="">
+                    <th>{index + 1}</th>
                     <td>
                       <div className="flex items-center gap-3">
                         <div className="avatar">
@@ -235,24 +249,26 @@ const ProductDetails = () => {
                           </div>
                         </div>
                         <div>
-                          <div className="font-bold">{ bid.buyer_name}</div>
+                          <div className="font-bold">{bid.buyer_name}</div>
                           <div className="text-sm opacity-50">
                             United States
                           </div>
                         </div>
                       </div>
                     </td>
+                    <td>{bid.buyer_email}</td>
+                    <td>{bid.bid_price}</td>
                     <td>
-                      {bid.buyer_email}
-                    </td>
-                    <td>{ bid.bid_price}</td>
-                    <td>
-                      {
-                        bid.status === "pending" ? <div className="badge badge-warning">{ bid.status}</div> : <div className="badge badge-success">{ bid.status}</div>
-                      }
+                      {bid.status === "pending" ? (
+                        <div className="badge badge-warning">{bid.status}</div>
+                      ) : (
+                        <div className="badge badge-success">{bid.status}</div>
+                      )}
                     </td>
                     <th>
-                      <button className="btn btn-outline btn-xs">Remove bid</button>
+                      <button className="btn btn-outline btn-xs">
+                        Remove bid
+                      </button>
                     </th>
                   </tr>
                 ))}

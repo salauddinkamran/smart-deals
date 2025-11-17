@@ -8,6 +8,7 @@ import MyProducts from "../MyProducts/MyProducts";
 import MyBids from "../MyBids/MyBids";
 import ProductDetails from "../ProductDetails/ProductDetails";
 import PrivateRoute from "./PrivateRoute";
+import CreateAProduct from "../CreateAProduct/CreateAProduct";
 
 export const router = createBrowserRouter([
   {
@@ -51,6 +52,12 @@ export const router = createBrowserRouter([
           <ProductDetails></ProductDetails>
         </PrivateRoute>
       },
+      {
+        path: "/createAProduct",
+        element: <PrivateRoute>
+          <CreateAProduct></CreateAProduct>
+        </PrivateRoute>
+      }
     ],
   },
 ]);
