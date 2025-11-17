@@ -45,10 +45,12 @@ const verifyFireBaseToken = async (req, res, next) => {
 const verifyJWTToken = (req, res, next) => {
   console.log("In middleware", req.headers);
   const authorization = req.headers.authorization;
+  console.log(authorization);
   if (!authorization) {
     return res.status(401).send({ message: "unauthorized access" });
   }
   const token = authorization.split(" ")[1];
+  console.log(token);
   if (!token) {
     return res.status(401).send({ message: "unauthorized access" });
   }
@@ -143,13 +145,14 @@ async function run() {
 
     app.get("/products/:id", async (req, res) => {
       const id = req.params.id;
-      // const query = { _id: new ObjectId(id) };
-      const query = { _id: id };
+      const query = { _id: new ObjectId(id) };
+      // const query = { _id: id };
       const result = await productsCollection.findOne(query);
       res.send(result);
     });
 
     app.post("/products", async (req, res) => {
+      console.log(req.headers)
       const newProduct = req.body;
       const result = await productsCollection.insertOne(newProduct);
       res.send(result);
@@ -216,6 +219,7 @@ async function run() {
         const query = { product: productId };
         const cursor = bidsCollection.find(query).sort({ bid_price: -1 });
         const result = await cursor.toArray();
+        console.log(result)
         res.send(result);
       }
     );
